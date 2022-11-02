@@ -1,32 +1,55 @@
-import java.util.HashMap;
-import java.util.Map;
+public class RecorderRunner {
+    public static void main(String[] args) {
+        Recorder recorder = new Recorder();
 
-public class Recorder{
-    private Map<String, String> map = new HashMap<>();
+        System.out.println("=================");
+        System.out.println("=== set & get ===");
+        System.out.println("=================");
 
-    public void put(String key, String value){
-        map.put(key,value);
-        System.out.println(key + "=" + value);
-    }
+        recorder.put("key1", "value1");
+        recorder.get("key1");
 
-    public void get(String key){
-        if(!map.containskey(key)){
-            throw new IllegalArgumentException();
+        System.out.println("");
+        System.out.println("=======================");
+        System.out.println("=== get unknown key ===");
+        System.out.println("=======================");
+
+        try {
+            recorder.get("unknown");
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
         }
-        System.out.println(map.get(key));
-    }
 
-    public void delete(String key){
-        if(!map.containskey(key)){
-            throw new IllegalArgumentException();
+        System.out.println("");
+        System.out.println("====================");
+        System.out.println("=== set & delete ===");
+        System.out.println("====================");
+
+        recorder.put("key2", "will delete");
+        recorder.delete("key2");
+
+        System.out.println("");
+        System.out.println("==========================");
+        System.out.println("=== delete unknown key ===");
+        System.out.println("==========================");
+
+        try {
+            recorder.get("key2");
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
         }
 
-        map.remove(key);
-        System.out.println("deleted:" + key);
-    }
+        System.out.println("");
+        System.out.println("========================");
+        System.out.println("=== delete all & get ===");
+        System.out.println("========================");
 
-    public void delete(){
-        map.clear();
-        System.out.println("deleted all");
+        recorder.delete();
+
+        try {
+            recorder.get("key1");
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
     }
 }

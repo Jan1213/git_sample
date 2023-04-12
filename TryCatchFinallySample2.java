@@ -1,4 +1,3 @@
-import java.util.logging.*;
 public class TryCatchFinallySample2{
 
 private static Logger logger =
